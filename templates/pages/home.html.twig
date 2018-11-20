@@ -5,5 +5,28 @@
         <h1>  Mon agence</h1>
         <p>  Bonjour je suis sur Symfony4 </p>
     </div>
+    
+    <div class="container"> 
+        <h2> Les derniers biens:</h2>
         
+        <div class="row flex">
+            
+            {% for property in properties%}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"> 
+                                <a href="#">  {{ property.titre }} </a>
+                            </h5> 
+                            <p class="card-text"> {{ property.city }} - {{ property.postalCode }}</p>
+                            <p class="text-primary"> {{ property.formatedPrice  }} €</p>
+                        </div> 
+                    </div> 
+                </div>    
+            {% endfor %}    
+            
+        </div>
+    
+    </div>
+   
 {% endblock %}

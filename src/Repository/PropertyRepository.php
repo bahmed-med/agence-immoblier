@@ -18,6 +18,15 @@ class PropertyRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Property::class);
     }
+    
+    public function findLatest(){
+        return $this->createQueryBuilder('p')
+                ->where('p.sold = false')
+                ->setMaxResults(4)
+                ->getQuery()
+                ->getResult();
+        
+    }
 
     // /**
     //  * @return Property[] Returns an array of Property objects

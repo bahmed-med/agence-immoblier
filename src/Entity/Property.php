@@ -9,7 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Property
 {
-    /**
+    const heat = [
+        1 => 'electric',
+        2 => 'gaz',
+        3 => 'fioul'
+    ];
+    
+    public function __construct() {
+        $this->created_at = new \DateTime;
+    }
+
+        /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -240,5 +250,9 @@ class Property
         $this->created_at = $created_at;
 
         return $this;
+    }
+    
+    public function formatedPrice():string {
+        return number_format($this->price, 0, ' ', ' ');
     }
 }
