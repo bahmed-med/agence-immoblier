@@ -1,0 +1,52 @@
+{% extends "base.html.twig"%}
+
+{% block title "gérer les bien" %}
+
+    {% block body %}
+        <div class="jumbotron text-center"> 
+            <h1>  Mon agence</h1>
+            <p>  Bonjour je suis sur Symfony4 </p>
+        </div>
+
+        <div class="container mt-4"> 
+            <h1> Gérer les biens:</h1>
+            
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for property in properties %}
+                        <tr>
+                            <td>{{ property.titre }}</td>
+                            <td> 
+                                <a href="{{ path('property_admin_edit', {'id': property.id })}}" class="btn btn-secondary"> Edit</a>
+                                <a href="{{ path('property_admin_delete', {'id': property.id })}}" data-target='#myModal' class="btn btn-danger"> Supprimer</a>
+                            
+                            </td>
+                        </tr>
+                        <div id="myModal" class="modal hide fade">
+                            <p> Etres vous sur de supprimer le bien ? </p>
+                        </div>
+                    {% endfor %}  
+                </tbody>
+            </table>
+                
+                <div class="text-right"> 
+                    <a href="{{ path('property_admin_new') }}" class="btn btn-primary"> Ajouter un bien </a>
+                </div>  
+
+
+
+        </div>
+
+    {% endblock %}

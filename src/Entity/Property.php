@@ -97,7 +97,7 @@ class Property
         return $this->id;
     }
 
-    public function getTitre(): string
+    public function getTitre()
     {
         return $this->titre;
     }
@@ -109,7 +109,7 @@ class Property
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
@@ -121,7 +121,7 @@ class Property
         return $this;
     }
 
-    public function getSurface(): int
+    public function getSurface()
     {
         return $this->surface;
     }
@@ -133,7 +133,7 @@ class Property
         return $this;
     }
 
-    public function getRooms(): int
+    public function getRooms()
     {
         return $this->rooms;
     }
@@ -145,7 +145,7 @@ class Property
         return $this;
     }
 
-    public function getBedrooms(): int
+    public function getBedrooms()
     {
         return $this->bedrooms;
     }
@@ -157,7 +157,7 @@ class Property
         return $this;
     }
 
-    public function getFloor(): int
+    public function getFloor()
     {
         return $this->floor;
     }
@@ -169,7 +169,7 @@ class Property
         return $this;
     }
 
-    public function getPrice(): int
+    public function getPrice()
     {
         return $this->price;
     }
@@ -181,7 +181,7 @@ class Property
         return $this;
     }
 
-    public function getHeat(): int
+    public function getHeat()
     {
         return $this->heat;
     }
@@ -193,7 +193,7 @@ class Property
         return $this;
     }
 
-    public function getCity(): string
+    public function getCity()
     {
         return $this->city;
     }
@@ -205,7 +205,7 @@ class Property
         return $this;
     }
 
-    public function getAdress(): string
+    public function getAdress()
     {
         return $this->adress;
     }
@@ -217,7 +217,7 @@ class Property
         return $this;
     }
 
-    public function getPostalCode(): string
+    public function getPostalCode()
     {
         return $this->postal_code;
     }
@@ -229,7 +229,7 @@ class Property
         return $this;
     }
 
-    public function getSold(): bool
+    public function getSold()
     {
         return $this->sold;
     }
@@ -241,7 +241,7 @@ class Property
         return $this;
     }
 
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCreatedAt()
     {
         return $this->created_at;
     }

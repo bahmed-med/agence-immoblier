@@ -1,0 +1,15 @@
+{% extends "base.html.twig"%}
+
+{% block title "editer un bien" %}
+
+    {% block body %}
+        <div class="jumbotron"> 
+            <h1>  Editer un bien</h1>
+        </div>
+
+        <div class="container mt-4"> 
+            {{ include('Admin/form.html.twig', {boutton: 'Editer'}) }}
+        </div>
+
+    {% endblock %}
+
