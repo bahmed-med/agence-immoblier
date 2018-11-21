@@ -21,19 +21,34 @@ class PropertyController extends AbstractController{
         $this->propertyRepository = $propertyRepository;
     }
 
-        /**
-     * @Route("/biens", name="achat",)
+    /**
+     * @Route("/biens", name="achat")
      * 
      * return Response
      */
     public function index():Response{
         
         $property = $this->propertyRepository->find(1);
-        
-        dump($property);
-        
-              
+            
         return  $this->render('property/index.html.twig', array('current_menu' => 'properties'));
         
+    }
+    
+    /**
+     * @Route("/show/{slug}-{id}", name="show", requirements={"slug": "[a-z0-9\-]*"})
+     * @param Property  $property Description
+     * return Response
+     */
+    
+    public function show(Property $property, string $slug): Response{
+        if($property->getSlug() !== $slug){
+            return $this->redirectToRoute('show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ]);
+        }
+        //$proporty =  $property = $this->propertyRepository->find($id);
+        return  $this->render('property/show.html.twig', array('current_menu' => 'properties',
+                                                               'property' => $property   ));
     }
 }
