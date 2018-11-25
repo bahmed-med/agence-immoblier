@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\RechercheData;
+use App\Form\RechercheDataType;
 
 use App\Repository\PropertyRepository;
 
@@ -30,7 +32,14 @@ class PropertyController extends AbstractController{
      */
     public function index(PaginatorInterface $paginator, Request $request):Response{
         
-        $query = $this->propertyRepository->findAllVisible();
+        
+        $rechercheData = new RechercheData();
+        
+        $form = $this->createForm(RechercheDataType::class, $rechercheData);
+        
+        $form->handleRequest($request);
+        
+        $query = $this->propertyRepository->findAllVisible($rechercheData);
         
         $properties = $paginator->paginate(
         $query, /* query NOT result */
@@ -40,7 +49,8 @@ class PropertyController extends AbstractController{
             
         return  $this->render('property/index.html.twig', 
                 array('current_menu' => 'properties',
-                     'properties' => $properties));
+                     'properties' => $properties,
+                     'form' => $form->createView()));
         
     }
     

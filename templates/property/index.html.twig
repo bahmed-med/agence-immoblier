@@ -3,6 +3,63 @@
 {% block title "Voire nos bien" %}
 
     {% block body %}
+
+        <div class="jumbotron"> 
+            <div class="container"> 
+                {{ form_start(form)}}
+                <div class="row"  style=" margin-top:20px;">
+                    <div class="col-md-3">
+                        Prix entre
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_widget(form.priceMin)}}
+                    </div>
+                    <div class="col-md-1">
+                        et
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_widget(form.priceMax)}}
+                    </div>
+                </div> 
+                <div class="row" style=" margin-top:20px;">
+                     <div class="col-md-3">
+                        Surface entre
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_widget(form.surfaceMax)}}
+                    </div>
+                    <div class="col-md-1">
+                        et
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_widget(form.surfaceMin)}}
+                    </div>
+                </div> 
+                <div class="row" style=" margin-top:20px;">
+                    <div class="col-md-3">
+                        Pièces entre
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_widget(form.roomMin)}}
+                    </div>
+                    <div class="col-md-1">
+                        et
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_widget(form.roomMax)}}
+                    </div>
+                </div>
+                <div class="row" style=" margin-top:20px;">
+                    <div class="col-md-12">
+                        <button class="btn btn-default" style="align:right;float: right;"> Recherche</button>
+                    </div>
+                </div>    
+                {{ form_widget(form)}}  
+                
+                {{ form_end(form)}}
+
+            </div>  
+        </div>
         <div class="container"> 
             <h1>  Voire nos bien</h1>
             <p>   </p>
@@ -14,9 +71,9 @@
                     </div>
                 {% endfor %}
             </div> 
-                <div class="navigation">
-                    {{ knp_pagination_render(properties) }}
-                </div>
+            <div class="navigation">
+                {{ knp_pagination_render(properties) }}
+            </div>
         </div>
 
     {% endblock %}
