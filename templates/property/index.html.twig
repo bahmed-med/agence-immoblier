@@ -2,13 +2,21 @@
 
 {% block title "Voire nos bien" %}
 
-{% block body %}
-    <div class="container"> 
-        <h1>  Voire nos bien</h1>
-        <p>   </p>
-    </div>
-        
-    
-    
+    {% block body %}
+        <div class="container"> 
+            <h1>  Voire nos bien</h1>
+            <p>   </p>
 
-{% endblock %}
+            <div class="row">
+                {% for property in properties %}
+                    <div class="col-4">
+                        {% include 'property/_property.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div> 
+                <div class="navigation">
+                    {{ knp_pagination_render(properties) }}
+                </div>
+        </div>
+
+    {% endblock %}

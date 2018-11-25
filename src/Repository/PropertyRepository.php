@@ -27,6 +27,20 @@ class PropertyRepository extends ServiceEntityRepository
                 ->getResult();
         
     }
+    
+    /**
+     * Pour faire la pagination
+     * @return Quety
+     */
+    
+    public function findAllVisible(){
+        
+           return $this->createQueryBuilder('p')
+                ->where('p.sold = false')
+                ->getQuery();
+                
+        
+    }
 
     // /**
     //  * @return Property[] Returns an array of Property objects
