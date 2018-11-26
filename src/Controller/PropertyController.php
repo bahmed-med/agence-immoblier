@@ -14,6 +14,7 @@ use App\Entity\RechercheData;
 use App\Form\RechercheDataType;
 
 use App\Repository\PropertyRepository;
+use App\Entity\Option;
 
 
 class PropertyController extends AbstractController{
@@ -38,7 +39,7 @@ class PropertyController extends AbstractController{
         $form = $this->createForm(RechercheDataType::class, $rechercheData);
         
         $form->handleRequest($request);
-        
+            
         $query = $this->propertyRepository->findAllVisible($rechercheData);
         
         $properties = $paginator->paginate(

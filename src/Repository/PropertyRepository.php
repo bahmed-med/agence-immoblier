@@ -35,7 +35,6 @@ class PropertyRepository extends ServiceEntityRepository
     
     public function findAllVisible($rechercheData){
         
-       // var_dump($rechercheData); exit;
         
         $query= $this->createQueryBuilder('p')
              ->where('p.sold = false');
@@ -75,8 +74,14 @@ class PropertyRepository extends ServiceEntityRepository
                     ->setParameter('maxRooms', $rechercheData->getRoomMax());
             
         }
-        
-        //echo $query->getQuery()->getSQL(); exit; 
+          
+        if($rechercheData->getOptions()->count() > 0){
+            
+            foreach ($rechercheData->getOptions() as $k => $option){
+                $query = $query->andWhere(":option$k MEMBER OF p.options")
+                     ->setParameter("option$k", $option);
+            }
+        }
         
         return $query->getQuery();
 

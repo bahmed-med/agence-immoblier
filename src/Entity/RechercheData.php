@@ -3,10 +3,12 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 class RechercheData {
     
-    private $surfaceMax;
+        private $surfaceMax;
     
     private $surfaceMin;
     
@@ -17,6 +19,17 @@ class RechercheData {
     private $roomMax;
     
     private $roomMin;
+    
+    /**
+     *
+     * @var ArrayCollection 
+     */
+    
+    private $options;
+    
+    public function __construct() {
+        $this->options = new ArrayCollection();
+    }
     
     function getSurfaceMax() {
         return $this->surfaceMax;
@@ -64,6 +77,14 @@ class RechercheData {
 
     function setRoomMin($roomMin) {
         $this->roomMin = $roomMin;
+    }
+    
+    function getOptions(): ArrayCollection {
+        return $this->options;
+    }
+
+    function setOptions(ArrayCollection $options) {
+        $this->options = $options;
     }
 
 

@@ -8,6 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Option;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class RechercheDataType extends AbstractType
 {
@@ -64,7 +67,14 @@ class RechercheDataType extends AbstractType
                 'choices' => $this->getRoom(),
                 'required' => false
                 
-            ])    
+            ])  
+                
+            ->add('options', EntityType::class, [
+                 'class' => Option::class,
+                 'choice_label' => 'name',
+                 'multiple' => true,
+                 'required' => false
+             ])     
  
             ;
     }
