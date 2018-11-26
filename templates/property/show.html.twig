@@ -8,6 +8,12 @@
             <div class="container"> 
                 <div class='row'>
                 <div class='col-md-8'>
+                        {% if property.imageName %}
+                            <!--<img src="images/properties/{#{{ property.imageName }}#}"  alt="card-img-top" style="width: 100% ; height: auto">-->
+                            <img src="{{ vich_uploader_asset(property, 'imageFile') }}"  alt="card-img-top" style="width: 100% ; height: auto">
+                        {% else %}
+                            <img src="/images/properties/empty_image.jpeg"  alt="card-img-top" style="width: 80% ; height: auto">
+                        {% endif %}
 
                 </div>
                 <div class='col-md-4'>
@@ -48,7 +54,15 @@
                     </table>    
                 </div>
                 <div class='col-md-4'>
-
+                    <h2> Spécifités: </h2>
+                    <ul clas= "list-group">
+                        {% for option in property.options %}
+                            
+                            <li class="list-group-item"> {{ option.name }}</li>
+                            
+                        {% endfor %}    
+                     
+                    </ul>
                 </div>
             </div>
         </div>

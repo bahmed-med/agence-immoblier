@@ -8,10 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
  * @UniqueEntity("titre")
+ * @Vich\Uploadable
  */
 class Property
 {
@@ -32,6 +36,22 @@ class Property
      * @ORM\Column(type="integer")
      */
     private $id;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
+    
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
+     * 
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @Assert\Length(min=5, max=225)
@@ -108,6 +128,11 @@ class Property
      * @ORM\ManyToMany(targetEntity="App\Entity\Option", inversedBy="properties")
      */
     private $options;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function getId(): int
     {
@@ -311,4 +336,38 @@ class Property
 
         return $this;
     }
+    
+    function getImageName() {
+        return $this->imageName;
+    }
+
+    function getImageFile() {
+        return $this->imageFile;
+    }
+
+    function setImageName($imageName) {
+        $this->imageName = $imageName;
+    }
+
+    function setImageFile(File $imageFile) {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+
 }
