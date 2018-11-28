@@ -6,6 +6,13 @@
         
         <div class="jumbotron"> 
             <div class="container"> 
+                
+                {% if not  form.vars.valid %}
+                    <div class="alert alert-danger"> 
+                        <p> vous devez remplir tout les champs </p>
+                    <div>    
+                    
+                {% endif %}    
                 <div class='row'>
                 <div class='col-md-8'>
                         {% if property.imageName %}
@@ -22,15 +29,33 @@
                     <div class="text-primary" style="font-size: 4em; font-weight: bold"> {{ property.formatedPrice  }} €</div>
 
                     <a class="btn btn-primary"> Contacter l'agence </a>
-
-                    <p> {{  property.description }} </p>
+                   
+                    <div id="contactForm" class="mt-4"> 
+                        {#{{ form_start(form, {'action': path('show', { 'id': property.id, 'slug' : property.slug }), 'method': 'POST'}) }}#}
+                        {{ form_start(form) }}
+                        <div class='row'>
+                            <div class="col"> {{ form_row(form.firstname) }}</div>
+                            <div class="col"> {{ form_row(form.lastname) }}</div>
+                        </div>
+                        <div class='row'>
+                            <div class="col"> {{ form_row(form.phone) }}</div>
+                            <div class="col"> {{ form_row(form.email) }}</div>
+                        </div> 
+                            
+                        {{ form_rest(form) }}
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                      
                 </div>
             </div>  
             </div>
         </div>
         
         <div class="container mt-4"> 
-            
+            <p> {{  property.description|nl2br }} </p>
             <div class='row'>
                 <div class='col-md-8'>
                     <h2> Caractéristique </h2>

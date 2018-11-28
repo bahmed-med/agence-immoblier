@@ -15,6 +15,9 @@ use App\Form\RechercheDataType;
 
 use App\Repository\PropertyRepository;
 use App\Entity\Option;
+use App\Entity\Contact;
+use App\Form\ContactType;
+use App\Notification\ContactNotification;
 
 
 class PropertyController extends AbstractController{
@@ -61,15 +64,34 @@ class PropertyController extends AbstractController{
      * return Response
      */
     
-    public function show(Property $property, string $slug): Response{
+    public function show(Property $property, string $slug, Request $request, ContactNotification $notification ): Response{
+        
         if($property->getSlug() !== $slug){
             return $this->redirectToRoute('show', [
                 'id' => $property->getId(),
-                'slug' => $property->getSlug()
+                'slug' => $property->getSlug(),
+               
             ]);
+        }
+        
+        $contact = new Contact();
+        $contact->setProperty($property);
+        $form = $this->createForm(ContactType::class, $contact);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            echo 'toto'; exit; 
+            $notification->notify($contact);
+            $this->addFlash('success', 'votre message est envoyé');
+              return $this->redirectToRoute('show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug(),
+                
+            ]);
+            
         }
         //$proporty =  $property = $this->propertyRepository->find($id);
         return  $this->render('property/show.html.twig', array('current_menu' => 'properties',
-                                                               'property' => $property   ));
+                                                               'property' => $property,
+                                                                'form'  => $form->createView()   ));
     }
 }
